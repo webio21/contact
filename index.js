@@ -1,0 +1,215 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* =========================
+     CONFIG / STATE
+  ========================= */
+  const navRight = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById('hamburger');
+  const navCenter = document.querySelector('#desktop-nav');
+
+  const links = navCenter?.querySelectorAll('.nav-link') || [];
+  const indicator = navCenter?.querySelector('.nav-indicator');
+
+  const sections = document.querySelectorAll(
+    '#features,#pricing,#demo,#download,#customers,#universe'
+  );
+
+  let isAutoScrolling = false;
+  let scrollTimer = null;
+
+  /* =========================
+     LOGO ANIMATION
+  ========================= */
+  const logo = document.querySelector('.nav-logo');
+
+  if (logo?.dataset.animate === "true") {
+    const normal = "logo.png";
+    const flash = "logo2.png";
+
+    const flashLogo = () => {
+      logo.src = flash;
+      setTimeout(() => {
+        logo.src = normal;
+
+        const nextBlink = 3500 + Math.random() * 2500;
+
+        setTimeout(flashLogo, nextBlink);
+      }, 120);
+    };
+
+    setTimeout(flashLogo, 100);
+  }
+
+  /* =========================
+     MOBILE MENU TOGGLE
+  ========================= */
+  const closeMenu = () => {
+    navRight?.classList.remove('active');
+  };
+
+  hamburger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navRight?.classList.toggle('active');
+  });
+
+  // ONE unified click handler (NO clone, NO duplicate listeners)
+  navRight?.addEventListener('click', (e) => {
+    const link = e.target.closest('.nav-link');
+    if (!link) return;
+
+    scrollToCategory(link.dataset.section);
+    closeMenu();
+  });
+
+  document.addEventListener('click', (e) => {
+    const insideMenu = navRight?.contains(e.target);
+    const insideHamburger = hamburger?.contains(e.target);
+
+    if (!insideMenu && !insideHamburger) {
+      closeMenu();
+    }
+  });
+
+  /* =========================
+     INDICATOR (desktop only)
+  ========================= */
+  function moveIndicator(link) {
+    if (!indicator || !link || !navCenter) return;
+
+    indicator.style.left = `${link.offsetLeft}px`;
+    indicator.style.width = `${link.offsetWidth}px`;
+    indicator.style.opacity = '1';
+  }
+
+  function setActiveLink(link) {
+    links.forEach(l => l.classList.remove('active'));
+
+    if (!link) {
+      indicator.style.opacity = '0';
+      return;
+    }
+
+    link.classList.add('active');
+    moveIndicator(link);
+  }
+
+  function setMobileActive(id) {
+    document.querySelectorAll('#mobile-menu .nav-link')
+      .forEach(l => l.classList.remove('active'));
+
+    if (!id) return;
+
+    const active = document.querySelector(
+      `#mobile-menu .nav-link[data-section="${id}"]`
+    );
+
+    active?.classList.add('active');
+  }
+
+  /* =========================
+     SCROLL TO SECTION
+  ========================= */
+  window.scrollToCategory = function (id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const top = target.offsetTop - 30;
+
+    const desktopLink = navCenter?.querySelector(
+      `.nav-link[data-section="${id}"]`
+    );
+
+    isAutoScrolling = true;
+
+    setActiveLink(desktopLink);
+    setMobileActive(id);
+
+    window.scrollTo({
+      top,
+      behavior: 'smooth'
+    });
+
+    // safety reset (avoid stuck state)
+    setTimeout(() => {
+      isAutoScrolling = false;
+    }, 1200);
+  };
+
+  /* =========================
+     ACTIVE SECTION TRACKING
+  ========================= */
+  function updateActiveSection() {
+    if (isAutoScrolling) return;
+
+    const navbar = document.querySelector('.navbar');
+    const scrollTop = window.scrollY + navbar.offsetHeight + 20;
+
+    const first = document.getElementById('features');
+    if (!first) return;
+
+    if (scrollTop < first.offsetTop) {
+      setActiveLink(null);
+      setMobileActive(null);
+      return;
+    }
+
+    let closest = null;
+    let minDistance = Infinity;
+
+    sections.forEach(sec => {
+      const distance = Math.abs(scrollTop - sec.offsetTop);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closest = sec.id;
+      }
+    });
+
+    const desktopLink = navCenter?.querySelector(
+      `.nav-link[data-section="${closest}"]`
+    );
+
+    setActiveLink(desktopLink);
+    setMobileActive(closest);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (isAutoScrolling) return;
+
+    if (scrollTimer) clearTimeout(scrollTimer);
+
+    scrollTimer = setTimeout(() => {
+      updateActiveSection();
+    }, 80);
+  });
+
+  window.addEventListener('resize', updateActiveSection);
+
+  /* =========================
+     RESIZE OBSERVER
+  ========================= */
+  if (navCenter) {
+    new ResizeObserver(() => {
+      const active = navCenter.querySelector('.nav-link.active');
+      if (active) moveIndicator(active);
+    }).observe(navCenter);
+  }
+
+  /* =========================
+     LANGUAGE TOGGLE
+  ========================= */
+  const langWrapper = document.getElementById('lang-wrapper');
+  const langToggle = document.getElementById('lang-toggle');
+
+  langToggle?.addEventListener('click', e => {
+    e.stopPropagation();
+    langWrapper?.classList.toggle('force-show');
+  });
+
+  document.addEventListener('click', e => {
+    if (!langWrapper?.contains(e.target)) {
+      langWrapper?.classList.remove('force-show');
+    }
+  });
+
+});
