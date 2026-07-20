@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact™ - For Easy Contact</title>
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="style.css">
+<script src="index.js"></script>
+<script async data-id="101507669" src="//static.getclicky.com/js"></script>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-left">
+    <img src="logo.png" class="nav-logo" data-animate="true">
+    <img src="contact_logo_en.png" class="logo-image" onclick="scrollToCategory('hero')">
+  </div>
+
+  <div id="desktop-nav" class="nav-center">
+    <div class="nav-indicator"></div>
+    <a class="nav-link" data-section="inbox" onclick="scrollToCategory('inbox')">
+      <img class="nav-icon" src="nav_inbox.png"><span class="nav-text">Inbox</span></a>
+    <a class="nav-link" data-section="contacts" onclick="scrollToCategory('contacts')">
+      <img class="nav-icon" src="nav_contacts.png"><span class="nav-text">Contacts</span></a>
+    <a class="nav-link" data-section="meetings" onclick="scrollToCategory('meetings')">
+      <img class="nav-icon" src="nav_meetings.png"><span class="nav-text">Meetings</span></a>
+    <a class="nav-link" data-section="answer" onclick="scrollToCategory('answer')">
+      <img class="nav-icon" src="nav_answer.png"><span class="nav-text">Answer</span></a>
+    <a class="nav-link" data-section="deals" onclick="scrollToCategory('deals')">
+      <img class="nav-icon" src="nav_deals.png"><span class="nav-text">Deals</span></a>
+    <a class="nav-link" data-section="card" onclick="scrollToCategory('card')">
+      <img class="nav-icon" src="nav_card.png"><span class="nav-text">Card</span></a>
+  </div>
+
+  <div class="nav-right">
+    <a href="login" class="nav-btn btn-a">Log in</a>
+    <a href="signup" class="nav-btn btn-b">Sign up</a>
+    <div id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <a class="nav-link" data-section="inbox"><img class="nav-icon" src="nav_inbox.png"><span class="nav-text">Inbox</span></a>
+  <a class="nav-link" data-section="contacts"><img class="nav-icon" src="nav_contacts.png"><span class="nav-text">Contacts</span></a>
+  <a class="nav-link" data-section="meetings"><img class="nav-icon" src="nav_meetings.png"><span class="nav-text">Meetings</span></a>
+  <a class="nav-link" data-section="answer"><img class="nav-icon" src="nav_answer.png"><span class="nav-text">Answer</span></a>
+  <a class="nav-link" data-section="deals"><img class="nav-icon" src="nav_deals.png"><span class="nav-text">Deals</span></a>
+  <a class="nav-link" data-section="card"><img class="nav-icon" src="nav_card.png"><span class="nav-text">Card</span></a>
+</div>
+
+<!-- Inbox Section -->
+<div id="inbox"></div>
+<h1>inbox</h1>
+<div class="divider"></div>
+<div class="subtitle">AI drafts first. You stay in control.</div>
+<div class="table-wrapper">
+</div>
+
+<!-- Card Section -->
+<div id="card"></div>
+<h1>card</h1>
+<div class="divider"></div>
+<div class="subtitle">AI drafts first. You stay in control.</div>
+<div class="table-wrapper">
+</div>
+
+</body>
+</html>

@@ -212,4 +212,147 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  });
+
+/* =========================
+   BILLING TOGGLE
+========================= */
+document.addEventListener("DOMContentLoaded",()=>{
+
+  function updateBilling(cycle, box){
+
+    /* Monthly Price */
+    box.querySelectorAll(".monthly").forEach(el=>{
+
+      let value = el.dataset[cycle];
+
+      if(!value){
+        return;
+      }
+
+      if(value.includes(".")){
+
+        let parts = value.split(".");
+
+        el.innerHTML =
+        parts[0] +
+        "<span class=\"decimal\">." +
+        parts[1] +
+        "</span>";
+
+      }else{
+
+        el.innerHTML = value;
+
+      }
+
+    });
+
+    /* Yearly Price */
+    box.querySelectorAll(".yearly[data-monthly]").forEach(el=>{
+
+      let value = el.dataset[cycle];
+
+      if(!value){
+        return;
+      }
+
+      if(value.includes(".")){
+
+        let parts = value.split(".");
+
+        el.innerHTML =
+        parts[0] +
+        "<span class=\"decimal\">." +
+        parts[1] +
+        "</span>";
+
+      }else{
+
+        el.innerHTML = value;
+
+      }
+
+    });
+
+    /* Period */
+    box.querySelectorAll(".period").forEach(el=>{
+
+      let value = el.dataset[cycle];
+
+      if(!value){
+        return;
+      }
+
+      el.innerHTML = value;
+
+    });
+
+    /* Renews */
+    box.querySelectorAll(".renews").forEach(el=>{
+
+      let value = el.dataset[cycle];
+
+      if(!value){
+        return;
+      }
+
+      el.innerHTML = value;
+
+    });
+
+    /* Save */
+    box.querySelectorAll(".save").forEach(el=>{
+
+      let value = el.dataset[cycle];
+
+      if(!value){
+        return;
+      }
+
+      el.innerHTML = value;
+
+    });
+
+  }
+
+
+  document.querySelectorAll(".pricing-box").forEach(box=>{
+
+    let buttons = box.querySelectorAll(".billing-toggle button");
+
+    buttons.forEach(btn=>{
+
+      btn.onclick=function(){
+
+        buttons.forEach(b=>{
+          b.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        updateBilling(
+          this.dataset.cycle,
+          box
+        );
+
+      };
+
+    });
+
+
+    let activeButton =
+    box.querySelector(".billing-toggle button.active");
+
+    if(activeButton){
+
+      updateBilling(
+        activeButton.dataset.cycle,
+        box
+      );
+
+    }
+
+  });
+
 });
