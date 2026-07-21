@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================
      CONFIG / STATE
   ========================= */
+
+  const isLandingPage =
+      document.body.dataset.page === "lander";
+
+  const activeNav =
+      document.body.dataset.activeNav;
+
   const navRight = document.getElementById('mobile-menu');
   const hamburger = document.getElementById('hamburger');
   const navCenter = document.querySelector('#desktop-nav');
@@ -54,11 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ONE unified click handler (NO clone, NO duplicate listeners)
   navRight?.addEventListener('click', (e) => {
+
     const link = e.target.closest('.nav-link');
+
     if (!link) return;
 
-    scrollToCategory(link.dataset.section);
+
+    e.stopPropagation();
+
+
     closeMenu();
+
+
+    if (isLandingPage) {
+
+        e.preventDefault();
+
+        scrollToCategory(link.dataset.section);
+
+    }
+
   });
 
   document.addEventListener('click', (e) => {
@@ -110,8 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
      SCROLL TO SECTION
   ========================= */
   window.scrollToCategory = function (id) {
+
+    if (!isLandingPage) return false;
+
     const target = document.getElementById(id);
-    if (!target) return;
+
+    if (!target) return false;
 
     const top = target.offsetTop - 30;
 
@@ -173,27 +199,66 @@ document.addEventListener('DOMContentLoaded', () => {
     setMobileActive(closest);
   }
 
-  window.addEventListener('scroll', () => {
-    if (isAutoScrolling) return;
+  if (isLandingPage) {
+      window.addEventListener('scroll', () => {
+        if (isAutoScrolling) return;
 
-    if (scrollTimer) clearTimeout(scrollTimer);
+        if (scrollTimer) clearTimeout(scrollTimer);
 
-    scrollTimer = setTimeout(() => {
-      updateActiveSection();
-    }, 80);
+        scrollTimer = setTimeout(() => {
+          updateActiveSection();
+        }, 80);
+    });
+}
+
+    window.addEventListener('resize', () => {
+
+    if (isLandingPage) {
+
+        updateActiveSection();
+
+    }
+
+
+    if (activeNav) {
+
+        const activeLink = navCenter?.querySelector(
+            `.nav-link[data-section="${activeNav}"]`
+        );
+
+        if (activeLink) {
+
+            moveIndicator(activeLink);
+
+        }
+
+    }
+
   });
-
-  window.addEventListener('resize', updateActiveSection);
 
   /* =========================
      RESIZE OBSERVER
   ========================= */
   if (navCenter) {
     new ResizeObserver(() => {
-      const active = navCenter.querySelector('.nav-link.active');
-      if (active) moveIndicator(active);
+        const active = navCenter.querySelector('.nav-link.active');
+        if (active) moveIndicator(active);
     }).observe(navCenter);
-  }
+}
+
+  /* =========================
+   DASH DEFAULT ACTIVE
+  ========================= */
+
+  if (activeNav) {
+
+      const activeLink = navCenter?.querySelector(
+        `.nav-link[data-section="${activeNav}"]`
+      );
+
+      setActiveLink(activeLink);
+      setMobileActive(activeNav);
+}
 
   /* =========================
      LANGUAGE TOGGLE
