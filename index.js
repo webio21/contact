@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const logo = document.querySelector('.nav-logo');
 
   if (logo?.dataset.animate === "true") {
-    const normal = "logo.png";
-    const flash = "logo2.png";
+    const normal = "img/logo.png";
+    const flash = "img/logo2.png";
 
     const flashLogo = () => {
       logo.src = flash;
@@ -365,6 +365,21 @@ document.addEventListener("DOMContentLoaded",()=>{
       el.innerHTML = value;
 
     });
+
+
+    /* Renews Mail */
+    box.querySelectorAll(".renews-mail").forEach(el=>{
+
+      let value = el.dataset[cycle];
+
+      if(!value){
+        return;
+      }
+
+      el.innerHTML = value;
+
+    });
+
 
     /* Save */
     box.querySelectorAll(".save").forEach(el=>{
