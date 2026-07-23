@@ -807,14 +807,14 @@ th.free .yearly{
 }
 
 #mobile-menu .nav-link.active {
-  color: #111111;
+  color: #000000;
 }
 
 #mobile-menu .nav-link:hover {
   background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.04),
-    rgba(0,0,0,0.02)
+    to bottom,
+    rgba(0, 0, 0, .01),
+    rgba(0, 0, 0, .02)
   );
 }
 
