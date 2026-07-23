@@ -219,6 +219,17 @@ tbody tr:hover td{
     justify-content:center;
 }
 
+.th-hot{
+    width:clamp(50px,40vw,100px);
+    height:auto;
+    margin-top:-195px;
+    margin-left:165px;
+    position:absolute;
+    user-select: none;
+    -webkit-user-drag: none;
+    z-index:1000;
+}
+
 .th-icon{
     width:clamp(100px,80vw,200px);
     height:auto;
@@ -283,6 +294,13 @@ tbody tr:hover td{
 .th-header{
     min-width:80px;
     padding:0 8px;
+}
+
+.th-hot{
+    width:clamp(25px,20vw,50px);
+    height:auto;
+    margin-top:-150px;
+    margin-left:80px;
 }
 
 .th-icon{
@@ -442,7 +460,7 @@ th.personal{
 
 .save{
   font-size:14px;
-  color:#00a650;
+  color:#ff6456;
   margin-top:-5px;
   margin-bottom:-2px;
 }
