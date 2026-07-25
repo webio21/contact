@@ -111,7 +111,7 @@ h4{
     width:130px;
     height:auto;
     left:55%;
-    top:27%;
+    top:22%;
     transform:translateX(-50%);
     pointer-events:none;
     user-select:none;
@@ -137,18 +137,18 @@ h4{
     transform-origin:center bottom;
 }
 
-.hero-balloon-wrap{
-    position:absolute;
-    left:50.7%;
-    top:20.5%;
-    animation:balloonFly 18s ease-in-out infinite alternate;
-}
-
 .hero-boat{
     width:20px;
     left:54%;
     top:57%;
     animation:boatFloat 12s ease-in-out infinite alternate;
+}
+
+.hero-balloon-wrap{
+    position:absolute;
+    left:50.7%;
+    top:20.5%;
+    animation:balloonFly 18s ease-in-out infinite alternate;
 }
 
 @keyframes balloonFly{
@@ -448,7 +448,7 @@ tbody tr:hover td{
 .th-title{
     font-size:34px;
     font-weight:800;
-    color:#111827;
+    color:#111;
     line-height:1.1;
     letter-spacing:-0.02em;
     margin-top:80px;
@@ -456,7 +456,7 @@ tbody tr:hover td{
 
 .th-subtitle{
     font-size:14px;
-    color:#6b7280;
+    color:#777;
     font-weight:500;
 }
 
@@ -873,12 +873,13 @@ th.free .yearly{
 
 .nav-link {
   display: flex;
+  flex: 1 1 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  height: 100%;
   min-width: 90px;
+  height: 100%;
   padding: 6px 22px;
   text-decoration: none;
   color: #000;
@@ -955,6 +956,7 @@ th.free .yearly{
 
 @media (max-width: 1200px) {
   .nav-link {
+    flex: 1 1 0;
     padding: 6px 18px;
     min-width: 75px;
     flex: 0 0 auto;
@@ -963,6 +965,7 @@ th.free .yearly{
 
 @media (max-width: 1100px) {
   .nav-link {
+    flex: 1 1 0;
     padding: 6px 14px;
     min-width: 60px;
   }
@@ -970,6 +973,7 @@ th.free .yearly{
 
 @media (max-width: 1024px) {
   .nav-link {
+    flex: 1 1 0;
     padding: 6px 10px;
     min-width: 45px;
   }
@@ -977,6 +981,7 @@ th.free .yearly{
 
 @media (max-width: 900px) {
   .nav-center {
+    flex: 1 1 0;
     opacity: 0;
     pointer-events: none;
   }
