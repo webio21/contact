@@ -667,12 +667,15 @@ th.personal{
 
 .mailbox-selector {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100px;
+    margin: 0 auto;
 }
 
 .qty-btn {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -691,6 +694,7 @@ th.personal{
 .qty-btn:hover {
     color: #555;
     border-color: #555;
+    box-shadow:0 4px 8px rgba(0,0,0,.06);
 }
 
 .qty-btn:active {
@@ -698,6 +702,7 @@ th.personal{
 }
 
 .qty-value {
+    min-width: 25px;
     text-align: center;
     font-size: 16px;
     font-weight: 600;
