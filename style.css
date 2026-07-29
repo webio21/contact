@@ -604,7 +604,12 @@ th.personal{
 
 @media (max-width:576px) {
 
+    h1{
+        font-size:46px;
+    }
+
     .h1-icon{
+        margin-top:28px;
         width:42px;
         height:42px;
         transform:translate(calc(-100% - 10px), -50%);
